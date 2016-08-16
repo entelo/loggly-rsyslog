@@ -2,7 +2,9 @@
 
 Loggly rsyslog Cookbook
 ================
-Installs and configures rsyslog for use with [Loggly](http://loggly.com). This cookbook was built upon the work from an existing cookbook, https://github.com/kdaniels/loggly-rsyslog.
+Installs and configures rsyslog for use with [Loggly](http://loggly.com). This cookbook was built upon the work from an existing cookbook, https://github.com/mveitas/loggly-rsyslog, which was built upon https://github.com/kdaniels/loggly-rsyslog.
+
+We didn't need the dependency on intermediate certificates, and the existing cookbook required them if TLS was enabled, so we forked it and removed the dependency.
 
 Requirements
 ------------
@@ -54,8 +56,6 @@ of a hash used to describe a file to monitor.
 * `node['loggly']['tls']['cert_path']` - Directory where the loggly certificate should be placed
 * `node['loggly']['tls']['cert_url']` - Url to the loggly.com certificate
 * `node['loggly']['tls']['cert_checksum']` - Cchecksum of the loggly.com certificate
-* `node['loggly']['tls']['intermediate_cert_url']` - Url to the intermediate certificate
-* `node['loggly']['tls']['intermediate_cert_checksum']` - Checksum of the intermediate certificate
 
 * `default['loggly']['token']['from_databag']` - Whether to load the Loggly token from a Data Bag (defaults to true)
 * `default['loggly']['token']['databag']` - The name of the Data Bag to load the credentials from (defaults to "loggly")
@@ -84,6 +84,7 @@ chef.encrypted_data_bag_secret_key_path = './encrypted_data_bag_secret'
 
 License & Authors
 -----------------
+- Author: Jonathan Nevelson <jnevelson@entelo.com>
 - Author: Matt Veitas <mveitas@gmail.com>
 
 ```text
